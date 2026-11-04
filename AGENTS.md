@@ -23,3 +23,4 @@
 - Counting UI (Azkar items and /tasbih) goes through src/components/tasbih-counter.tsx with rules in src/lib/tasbih.ts; only the round button counts, and reset always confirms, so taps elsewhere never change a count.
 - Shared surfaces, motion and counter colours are tokens/utilities in src/styles.css (surface-card, bg-counter-shell, lcd-screen, counter-button); reuse them instead of per-screen styles.
 - Prayer times are computed for the selected city's calendar day and shown in that city's IANA time zone (City.tz; custom GPS uses device zone), so the next-prayer countdown is right regardless of device time zone.
+- Shared pop-ups use the global popup classes with vh/dvh fallback, explicit interactive layers and bounded scrolling; Vaul reciter controls opt out of dragging so older Android WebViews keep dialogs visible and taps reliable.

@@ -100,3 +100,7 @@
 ## Production polish (Nov 3)
 - [ ] Fix Downloads screen issues from screenshot
 - [ ] Review every screen on phone size and fix layout problems
+
+## Android pop-up controls (Nov 4)
+- [ ] Correct shared pop-up sizing, stacking and touch handling; verify menu, confirmed reset and reciter selection.
+- [ ] Verify installed Android APK: requires a rebuilt APK and a physical Android device.

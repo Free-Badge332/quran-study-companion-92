@@ -82,6 +82,9 @@
   --header-height: 4.25rem;
   --bottom-nav-height: 4rem;
   --page-gutter: 1rem;
+  --viewport-height: 100vh;
+  --overlay-layer: 70;
+  --popup-layer: 71;
   --scrim: oklch(0.12 0.016 175 / 65%);
   --radius: 0.75rem;
   --background: oklch(0.975 0.015 85);
@@ -457,4 +460,29 @@ html.native body { padding-inline: 0; }
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar { display: none; }
+}
+
+/* Android WebViews before Chromium 108 need vh instead of dvh. */
+@supports (height: 100dvh) {
+  :root { --viewport-height: 100dvh; }
+}
+.popup-overlay { z-index: var(--overlay-layer); pointer-events: auto; }
+.popup-panel { z-index: var(--popup-layer); pointer-events: auto; }
+.popup-overlay[data-state="closed"], .popup-panel[data-state="closed"] { pointer-events: none; }
+.popup-centered {
+  left: 50%;
+  top: calc((var(--viewport-height) + var(--safe-top) - var(--safe-bottom)) / 2);
+  transform: translate(-50%, -50%);
+  width: calc(100% - 2rem - var(--safe-left) - var(--safe-right));
+  max-height: calc(var(--viewport-height) - var(--safe-top) - var(--safe-bottom) - 2rem);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.popup-drawer { max-height: calc(var(--viewport-height) * 0.85); }
+.popup-sheet { height: var(--viewport-height); max-height: var(--viewport-height); }
+.popup-scroll { touch-action: pan-y; -webkit-overflow-scrolling: touch; }
+/* Keep controls tappable without Vaul treating list scrolling as a dismissal. */
+[data-vaul-no-drag] { touch-action: pan-y; }
+@supports not (height: 100dvh) {
+  .popup-overlay, .popup-panel { animation: none !important; }
 }
