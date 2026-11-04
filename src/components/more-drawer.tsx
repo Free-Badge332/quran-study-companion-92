@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetDescription, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import type { MsgKey } from "@/lib/i18n";
 import { LANGUAGES, type Lang } from "@/lib/quran";
@@ -60,9 +61,9 @@ export function MoreDrawer() {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <button type="button" aria-label={tr("navMore")} className="grid h-11 w-11 shrink-0 place-items-center rounded-full text-foreground transition-colors hover:bg-secondary">
+        <Button variant="ghost" size="icon" aria-label={tr("navMore")} className="rounded-full text-foreground hover:bg-secondary">
           <Menu size={22} />
-        </button>
+        </Button>
       </SheetTrigger>
       <SheetContent side="left" className="drawer-panel flex w-[82vw] max-w-xs flex-col gap-0 border-border bg-background p-0">
         <div className="flex items-center justify-between px-6 pb-5 pt-[calc(1.5rem+var(--safe-top,0px))]">
@@ -71,7 +72,7 @@ export function MoreDrawer() {
             <SheetDescription className="mt-0.5 text-xs text-muted-foreground">{tr("moreTitle")}</SheetDescription>
           </div>
         </div>
-        <nav aria-label={tr("navMore")} className="flex-1 overflow-y-auto px-3 pb-4">
+        <nav aria-label={tr("navMore")} className="popup-scroll min-h-0 flex-1 overflow-y-auto px-3 pb-4">
           {GROUPS.map((g) => (
             <section key={g.title} className="border-t border-border/70 py-3 first:border-t-0 first:pt-0">
               <h2 className="px-3 pb-1 pt-1 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-muted-foreground">{tr(g.title)}</h2>
